@@ -1,0 +1,14 @@
+{
+  "appid": "touristappid",
+  "projectname": "teaching-assistant",
+  "compileType": "miniprogram",
+  "miniprogramRoot": "miniprogram/",
+  "setting": {
+    "es6": true,
+    "enhance": true,
+    "useCompilerPlugins": [
+      "typescript"
+    ],
+    "urlCheck": true
+  }
+}

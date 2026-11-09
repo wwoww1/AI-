@@ -1,0 +1,33 @@
+page {background:#f6f7f2;color:#172d28;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;}
+.screen {padding:42rpx 36rpx 86rpx;}
+.hero {padding:32rpx 8rpx 46rpx;}
+.title {font-size:56rpx;line-height:1.2;letter-spacing:-1rpx;font-weight:700;}
+.subtitle,.muted,.state {color:#506862;font-size:27rpx;line-height:1.6;}
+.subtitle {margin-top:18rpx;}
+.card {background:#fff;border:1rpx solid #dce3dc;border-radius:20rpx;padding:28rpx;margin-bottom:18rpx;}
+.section {font-weight:650;font-size:35rpx;margin:36rpx 0 18rpx;}
+.name {font-size:32rpx;font-weight:600;}
+.answer,.feedback {font-size:30rpx;line-height:1.65;word-break:break-all;white-space:pre-wrap;margin:14rpx 0;}
+.feedback {background:#eef5ee;padding:18rpx;border-radius:12rpx;}
+textarea,input {background:#f5f6f1;border-radius:12rpx;box-sizing:border-box;padding:20rpx 22rpx;width:100%;font-size:30rpx;margin:16rpx 0;}
+textarea {height:200rpx;} input {height:84rpx;}
+button {border:none;border-radius:12rpx;font-size:29rpx;line-height:1.4;padding:21rpx;margin:18rpx 0 0;}
+button::after {border:none;}
+.primary {background:#184b3d;color:white;}
+.secondary {background:#e6ede4;color:#1e483a;}
+.link {font-size:26rpx;padding:12rpx 0;background:transparent;color:#245d4d;margin:0;}
+.row {display:flex;align-items:center;justify-content:space-between;gap:18rpx;}
+.row .section {margin:24rpx 0 18rpx;}
+.error {color:#9d382d;font-size:27rpx;line-height:1.5;margin:16rpx 0;}
+.empty {color:#577068;padding:24rpx 0;font-size:28rpx;}
+radio-group {display:flex;gap:42rpx;margin:20rpx 0;} radio {transform:scale(.85);}
+.tools {display:grid;grid-template-columns:1fr 1fr;gap:16rpx;margin:32rpx 0;}
+.tool,.record {background:#fff;border:1rpx solid #dce3dc;border-radius:14rpx;padding:22rpx;color:#214b3c;font-size:30rpx;}
+.tool.wide {margin:32rpx 0;}
+.record {text-align:left;width:100%;box-sizing:border-box;}
+.choices {display:block;}
+.choices label {display:block;padding:12rpx 0;font-size:29rpx;}
+.title + .card,.subtitle + .card,.conversation {margin-top:24rpx;}
+.timer {font-size:78rpx;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:2rpx;margin-top:20rpx;}
+.editor {background:#fff;border:1rpx solid #dce3dc;height:500rpx;line-height:1.6;}
+.editor.plan {height:650rpx;}

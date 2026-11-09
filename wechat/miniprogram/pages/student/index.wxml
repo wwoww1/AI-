@@ -1,0 +1,19 @@
+<view class="screen">
+  <view class="row"><view class="title">我的学习</view><button class="link" bindtap="leave">退出</button></view>
+  <view class="tools">
+    <navigator class="tool" url="/pages/chat/index">AI 老师 ›</navigator><navigator class="tool" url="/pages/focus/index">学习督导 ›</navigator>
+    <navigator class="tool" url="/pages/check/index?stage=preview">预习检测 ›</navigator><navigator class="tool" url="/pages/check/index?stage=review">复习检测 ›</navigator>
+  </view><view class="section">我的作业</view>
+  <view wx:if="{{task}}" class="card" style="margin-top:32rpx"><view class="name">{{task.title}}</view><view class="answer">{{task.prompt}}</view>
+    <textarea placeholder="写下答案或计算过程" value="{{answer}}" bindinput="edit" disabled="{{sending}}" maxlength="2000"/>
+    <button class="primary" bindtap="submit" loading="{{sending}}" disabled="{{sending || !answer}}">提交作业</button>
+  </view>
+  <view class="error" wx:if="{{error}}">{{error}}</view>
+  <view class="row"><view class="section">提交记录</view><button class="link" bindtap="refresh">刷新</button></view>
+  <view class="empty" wx:if="{{loading}}">正在读取作业…</view>
+  <view class="empty" wx:elif="{{!history.length && !error}}">还没有提交记录。</view>
+  <view class="card" wx:for="{{history}}" wx:key="id"><view class="row"><view class="state">{{item.status}}</view><view class="muted">{{item.date}}</view></view>
+    <view class="answer">{{item.answer}}</view>
+    <view class="feedback" wx:if="{{item.review}}"><view class="name">{{item.review.verdict === 'correct' ? '正确' : '需订正'}}</view>{{item.review.feedback}}<view class="muted" wx:if="{{item.review.tag}}">错因 · {{item.review.tag}}</view></view>
+  </view>
+</view>

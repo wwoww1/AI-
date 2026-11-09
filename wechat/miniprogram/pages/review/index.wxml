@@ -1,0 +1,9 @@
+<view class="screen"><view class="title">复核作答</view>
+  <block wx:if="{{item}}"><view class="section">{{task.title}}</view><view class="card"><view class="muted">{{task.prompt}}</view><view class="answer">{{item.name}} · {{item.answer}}</view></view>
+    <view class="section">批改草稿</view><view class="card"><block wx:if="{{item.draft}}"><view class="state">{{item.draft.source}} · {{item.draft.verdict === 'correct' ? '正确' : item.draft.verdict === 'incorrect' ? '需订正' : '需教师判断'}}</view><view class="answer">{{item.draft.feedback}}</view><view wx:if="{{item.draft.tag}}" class="muted">{{item.draft.tag}}</view></block><view wx:else class="muted">自动批改未完成，请根据原作答填写反馈。</view></view>
+    <view class="section">给学生的反馈</view><view class="card"><radio-group bindchange="select"><label><radio value="correct" checked="{{verdict === 'correct'}}"/>正确</label><label><radio value="incorrect" checked="{{verdict === 'incorrect'}}"/>需订正</label></radio-group>
+      <textarea maxlength="1000" placeholder="给学生的反馈" value="{{feedback}}" bindinput="feedbackInput"/>
+      <input wx:if="{{verdict === 'incorrect'}}" placeholder="错因，用于班级汇总" maxlength="80" value="{{tag}}" bindinput="tagInput"/>
+      <button class="primary" bindtap="save" disabled="{{busy}}" loading="{{busy}}">确认并发给学生</button></view></block>
+  <view class="error" wx:if="{{error}}">{{error}}</view>
+</view>

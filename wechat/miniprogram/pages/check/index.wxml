@@ -1,0 +1,15 @@
+<view class="screen">
+  <view class="title">{{title}}</view><view class="subtitle">{{sheet.topic}}</view>
+  <block wx:if="{{result}}"><view class="section">本次答对 {{result.score}} / {{result.total}} 题</view>
+    <view wx:for="{{result.items}}" wx:key="id" class="card"><view class="state">{{item.ok ? '已答对' : '再练一练'}} · {{item.skill}}</view>
+      <view class="answer">{{item.prompt}}</view><view class="muted">你的选择：{{item.chosen}}</view>
+      <view wx:if="{{!item.ok}}" class="muted">参考答案：{{item.expected}}</view><view class="feedback">{{item.reason}}</view></view>
+    <button class="secondary" bindtap="again">再做一次</button>
+  </block>
+  <block wx:elif="{{sheet}}"><view wx:for="{{sheet.questions}}" wx:key="id" class="card"><view class="name">{{index+1}}. {{item.prompt}}</view>
+    <radio-group class="choices" data-id="{{item.id}}" bindchange="choose"><label wx:for="{{item.options}}" wx:for-item="option" wx:for-index="n" wx:key="*this"><radio value="{{n}}" checked="{{answers[item.id] === n}}" disabled="{{busy}}"/>{{option}}</label></radio-group>
+  </view><button class="primary" bindtap="submit" disabled="{{busy}}" loading="{{busy}}">提交检测</button></block>
+  <view wx:if="{{error}}" class="error">{{error}}</view><button wx:if="{{!sheet && error}}" bindtap="load" class="link">重新读取</button>
+  <view wx:if="{{history.length}}" class="section">历次结果</view>
+  <button class="record row" wx:for="{{history}}" wx:key="id" data-id="{{item.id}}" bindtap="inspect"><text>{{item.date}}</text><text>{{item.score}} / {{item.total}} 题 ›</text></button>
+</view>

@@ -1,0 +1,16 @@
+<view class="screen">
+  <view class="title">学习督导</view><view class="subtitle">为一个目标留出时间，到时在本页提醒。离开后可回来继续。</view>
+  <view class="card" wx:if="{{focus}}"><view class="state">{{focus.state === 'done' ? '已结束' : focus.state === 'paused' ? '已暂停' : '学习中'}}</view><view class="name">{{focus.goal}}</view>
+    <block wx:if="{{focus.state !== 'done'}}"><view class="timer">{{timeText}}</view><view wx:if="{{timeText === '0:00'}}" class="feedback">约定时间到了。能独立解释或完成这个目标了吗？</view>
+    <view class="row"><button wx:if="{{focus.state === 'running'}}" data-state="paused" bindtap="change" disabled="{{busy}}" class="secondary">暂停</button>
+      <button wx:else data-state="running" bindtap="change" disabled="{{busy}}" class="secondary">继续</button>
+      <button data-state="done" bindtap="change" disabled="{{busy}}" class="primary">结束本次学习</button></view></block>
+    <button class="link" bindtap="coach" disabled="{{advising || busy}}" loading="{{advising}}">获取督学建议</button>
+    <view wx:if="{{advice}}" class="feedback"><view class="state">{{advice.source}}</view>{{advice.text}}</view>
+  </view>
+  <view wx:if="{{!loading && (!focus || focus.state === 'done')}}" class="card"><view class="name">新学习目标</view>
+    <input placeholder="比如：能独立完成一道通分题" maxlength="160" value="{{goal}}" bindinput="goalInput"/>
+    <view class="muted">学习时长（分钟）</view><input type="number" value="{{minutes}}" maxlength="3" bindinput="timeInput"/>
+    <button bindtap="start" class="primary" loading="{{busy}}" disabled="{{busy}}">开始学习</button></view>
+  <view wx:if="{{error}}" class="error">{{error}}</view><button wx:if="{{error}}" class="link" bindtap="load">刷新状态</button>
+</view>

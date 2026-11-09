@@ -1,0 +1,25 @@
+<view class="screen">
+  <block wx:if="{{!current}}"><view class="title">备课与教案</view>
+    <view class="section">新建备课</view><view class="card">
+      <view class="muted">课题</view><input placeholder="如：异分母分数加法" value="{{topic}}" maxlength="120" data-field="topic" bindinput="edit" disabled="{{busy}}"/>
+      <view class="muted">授课对象</view><input placeholder="如：小学五年级" maxlength="80" value="{{audience}}" data-field="audience" bindinput="edit" disabled="{{busy}}"/>
+      <view class="muted">教学目标与设想</view><textarea maxlength="800" value="{{goal}}" data-field="goal" bindinput="edit" disabled="{{busy}}" placeholder="学生下课时应能独立完成什么？"/>
+      <view class="muted">课时（分钟）</view><input type="number" maxlength="3" value="{{minutes}}" data-field="minutes" bindinput="edit" disabled="{{busy}}"/>
+      <view class="row"><text class="muted">参考本班已确认错因</text><switch checked="{{includeErrors}}" bindchange="toggle" disabled="{{busy}}" color="#184b3d"/></view>
+      <button class="primary" bindtap="create" loading="{{busy}}" disabled="{{busy}}">生成备课建议</button></view>
+    <view class="section">我的备课</view><view wx:if="{{!lessons.length}}" class="empty">生成的备课会保存在这里。</view>
+    <button class="record row" wx:for="{{lessons}}" wx:key="id" data-id="{{item.id}}" disabled="{{busy}}" bindtap="open"><text>{{item.topic}}</text><text class="state">{{item.has_plan ? '已有教案' : '备课草稿'}} ›</text></button>
+  </block>
+  <block wx:else><button class="link" bindtap="back" disabled="{{busy}}">‹ 我的备课</button>
+    <view class="title">{{current.topic}}</view><view class="subtitle">{{current.audience}} · {{current.minutes}} 分钟</view>
+    <view class="card"><view class="muted">教学目标</view><view class="answer">{{current.goal}}</view>
+      <view wx:for="{{current.errors}}" wx:key="tag" class="muted">已确认错因：{{item.tag}}（{{item.count}} 份）</view></view>
+    <view class="section">备课建议</view><view class="state">{{current.prep_source}}</view>
+    <textarea class="editor" maxlength="10000" value="{{prep}}" data-field="prep" bindinput="edit" disabled="{{busy}}"/>
+    <block wx:if="{{current.plan}}"><view class="section">教案草稿</view><view class="state">{{current.plan_source}}</view>
+      <textarea class="editor plan" maxlength="10000" value="{{plan}}" data-field="plan" bindinput="edit" disabled="{{busy}}"/></block>
+    <button wx:else class="primary" data-action="plan" bindtap="update" disabled="{{busy}}" loading="{{busy}}">用当前备课生成教案</button>
+    <button class="secondary" bindtap="update" data-action="save" disabled="{{busy || !dirty}}">保存修改</button>
+  </block>
+  <view wx:if="{{error}}" class="error">{{error}}</view>
+</view>

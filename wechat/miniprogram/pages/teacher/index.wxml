@@ -1,0 +1,14 @@
+<view class="screen">
+  <view class="row"><view class="title">班级作业</view><button class="link" bindtap="leave">退出</button></view>
+  <navigator class="tool wide" url="/pages/lessons/index">备课与教案 ›</navigator>
+  <view class="section">错因汇总</view><view class="card"><view class="muted">已复核 {{summary.reviewed}} 份作答</view>
+    <view class="row" wx:for="{{summary.errors}}" wx:key="tag"><view class="answer">{{item.tag}}</view><view class="state">{{item.count}} 份</view></view>
+    <view wx:if="{{!summary.errors.length}}" class="muted">暂无已确认的错因。</view></view>
+  <view class="row"><view class="section">学生作答</view><button class="link" bindtap="refresh">刷新</button></view>
+  <view class="error" wx:if="{{error}}">{{error}}</view>
+  <view class="empty" wx:if="{{loading}}">正在读取作答…</view><view class="empty" wx:elif="{{!items.length && !error}}">学生提交作业后，将出现在这里。</view>
+  <view class="card" wx:for="{{items}}" wx:key="id"><view class="row"><view class="name">{{item.name}}</view><view class="state">{{item.status}}</view></view><view class="muted">{{item.date}}</view><view class="answer">{{item.answer}}</view>
+    <button wx:if="{{item.state === 'draft' || item.state === 'failed'}}" class="primary" bindtap="open" data-id="{{item.id}}">复核作答</button>
+    <view wx:if="{{item.review}}" class="feedback">{{item.review.feedback}}</view>
+  </view>
+</view>

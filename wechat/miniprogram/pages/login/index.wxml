@@ -1,0 +1,9 @@
+<view class="screen">
+  <view class="hero"><view class="title">教学工作台</view><view wx:if="{{demo}}" class="subtitle">本地演示使用两种示例身份，共用同一个班级。</view></view>
+  <view wx:if="{{demo}}">
+    <view class="card"><view class="name">学生</view><view class="muted">向老师提问、检测学习成果、提交作业。</view><button class="primary" data-role="student" bindtap="enter" disabled="{{busy}}">进入学生端</button></view>
+    <view class="card"><view class="name">教师</view><view class="muted">复核班级作业，准备课程并编写教案。</view><button class="secondary" data-role="teacher" bindtap="enter" disabled="{{busy}}">进入教师端</button></view>
+  </view>
+  <button wx:else class="primary" bindtap="enter" loading="{{busy}}" disabled="{{busy}}">微信登录</button>
+  <view class="error" wx:if="{{error}}">{{error}}</view>
+</view>

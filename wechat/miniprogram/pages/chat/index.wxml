@@ -1,0 +1,11 @@
+<view class="screen">
+  <view class="title">AI 老师</view>
+  <view wx:if="{{!turns.length}}" class="empty">写下题目或卡住的那一步，也可以问“为什么分数相加要先通分？”</view>
+  <view wx:for="{{turns}}" wx:key="id" class="card conversation">
+    <view class="muted">我的提问</view><view class="answer">{{item.question}}</view>
+    <view class="state">老师回答 · {{item.source}}</view><view class="feedback">{{item.answer}}</view>
+  </view>
+  <textarea placeholder="提问或接着上一条回答继续问" maxlength="2000" value="{{question}}" disabled="{{busy}}" bindinput="edit"/>
+  <button class="primary" bindtap="send" loading="{{busy}}" disabled="{{busy || !ready || !question}}">{{busy ? '老师正在回答' : '发送问题'}}</button>
+  <view wx:if="{{error}}" class="error">{{error}}</view><button wx:if="{{!ready && error}}" class="link" bindtap="load">重新读取</button>
+</view>
